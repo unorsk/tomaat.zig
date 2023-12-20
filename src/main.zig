@@ -55,7 +55,7 @@ pub fn main() !void {
             const s0 = @divTrunc(59 - s, 10);
             const s1 = @rem(59 - s, 10);
             try printNumbers(m0, m1, s0, s1);
-            std.time.sleep(1000 * 1000 * 10);
+            std.time.sleep(1000 * 1000 * 1000);
         }
     }
 }
