@@ -37,6 +37,8 @@ pub fn printNumbers(m0: usize, m1: usize, s0: usize, s1: usize) !void {
     const stdout = bw.writer();
 
     try stdout.print("{s}", .{"\x1B[2J"}); // clear screen
+    try stdout.print("{s}", .{"\x1B[5A"}); // move cursor up 5 lines
+
     for (range(5), 0..) |_, i| {
         try stdout.print(" {s} ", .{digits[m0][i]});
         try stdout.print(" {s} ", .{digits[m1][i]});
