@@ -36,7 +36,7 @@ pub fn printNumbers(m0: usize, m1: usize, s0: usize, s1: usize) !void {
     var bw = std.io.bufferedWriter(stdout_file);
     const stdout = bw.writer();
 
-    try stdout.print("{s}", .{"\x1B[2J"}); // clear screen
+    // try stdout.print("{s}", .{"\x1B[2J"}); // clear screen
     try stdout.print("{s}", .{"\x1B[5A"}); // move cursor up 5 lines
 
     for (range(5), 0..) |_, i| {
@@ -51,6 +51,7 @@ pub fn printNumbers(m0: usize, m1: usize, s0: usize, s1: usize) !void {
 }
 
 pub fn main() !void {
+    //try stdout.print("s{}", .{"\x1B[5A]"});
     for (0..25) |m| {
         for (0..60) |s| {
             const m0 = @divTrunc(24 - m, 10);
