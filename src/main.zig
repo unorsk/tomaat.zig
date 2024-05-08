@@ -1,15 +1,15 @@
 const std = @import("std");
 
-var zero = [_][]const u8{ "██████", "██  ██", "██  ██", "██  ██", "██████" };
-var one = [_][]const u8{ "  ██  ", "████  ", "  ██  ", "  ██  ", "██████" };
-var two = [_][]const u8{ "██████", "    ██", "██████", "██    ", "██████" };
-var three = [_][]const u8{ "██████", "    ██", "██████", "    ██", "██████" };
-var four = [_][]const u8{ "██  ██", "██  ██", "██████", "    ██", "    ██" };
-var five = [_][]const u8{ "██████", "██    ", "██████", "    ██", "██████" };
-var six = [_][]const u8{ "██████", "██    ", "██████", "██  ██", "██████" };
-var seven = [_][]const u8{ "██████", "    ██", "    ██", "    ██", "    ██" };
-var eight = [_][]const u8{ "██████", "██  ██", "██████", "██  ██", "██████" };
-var nine = [_][]const u8{ "██████", "██  ██", "██████", "    ██", "██████" };
+var zero = .{ "██████", "██  ██", "██  ██", "██  ██", "██████" };
+var one = .{ "  ██  ", "████  ", "  ██  ", "  ██  ", "██████" };
+var two = .{ "██████", "    ██", "██████", "██    ", "██████" };
+var three = .{ "██████", "    ██", "██████", "    ██", "██████" };
+var four = .{ "██  ██", "██  ██", "██████", "    ██", "    ██" };
+var five = .{ "██████", "██    ", "██████", "    ██", "██████" };
+var six = .{ "██████", "██    ", "██████", "██  ██", "██████" };
+var seven = .{ "██████", "    ██", "    ██", "    ██", "    ██" };
+var eight = .{ "██████", "██  ██", "██████", "██  ██", "██████" };
+var nine = .{ "██████", "██  ██", "██████", "    ██", "██████" };
 var colon = [_][]const u8{ "  ", "██", "  ", "██", "  " };
 var colon0 = [_][]const u8{ "  ", "░░", "  ", "░░", "  " };
 
@@ -40,11 +40,9 @@ pub fn printNumbers(m0: usize, m1: usize, s0: usize, s1: usize) !void {
     try stdout.print("{s}", .{"\x1B[5A"}); // move cursor up 5 lines
 
     for (range(5), 0..) |_, i| {
-        try stdout.print(" {s} ", .{digits[m0][i]});
-        try stdout.print(" {s} ", .{digits[m1][i]});
-        try stdout.print(" {s} ", .{if (@rem(s1, 2) == 1) colon[i] else colon0[i]});
-        try stdout.print(" {s} ", .{digits[s0][i]});
-        try stdout.print(" {s} \n", .{digits[s1][i]});
+        const colonToUse = if (@rem(s1, 2) == 1) colon else colon0;
+
+        try stdout.print("{s} {s} {s} {s} {s}\n", .{ digits[m0][i], digits[m1][i], colonToUse[i], digits[s0][i], digits[s1][i] });
     }
 
     try bw.flush();
